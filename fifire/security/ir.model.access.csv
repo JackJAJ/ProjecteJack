@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fifire_hero,fifire.hero,model_fifire_hero,base.group_user,1,1,1,1
+access_fifire_tower,fifire.tower,model_fifire_tower,base.group_user,1,1,1,1
+access_fifire_army,fifire.army,model_fifire_army,base.group_user,1,1,1,1
+access_fifire_battle,fifire.battle,model_fifire_battle,base.group_user,1,1,1,1
+access_fifire_battle_wizard,fifire.battle.wizard,model_fifire_battle_wizard,base.group_user,1,1,1,1
+access_fifire_recruit_wizard,fifire.recruit.wizard,model_fifire_recruit_wizard,base.group_user,1,1,1,1

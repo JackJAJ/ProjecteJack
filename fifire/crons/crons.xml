@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+
+        <!-- compute battle outcomes 
+
+        <record id="fifire.ir_cron_compute_battle_outcome" model="ir.cron">
+            <field name="name">Compute Battle Outcomes</field>
+            <field name="model_id" ref="model_fifire_battle"/> 
+            <field name="code">model.simulate_battle</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+-->
+
+    </data>
+</odoo>
+

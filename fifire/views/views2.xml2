@@ -1,0 +1,374 @@
+<odoo>
+    <data>
+
+        <!-- Player Views -->
+        <record id="view_player_tree" model="ir.ui.view">
+            <field name="name">fifire.player.tree</field>
+            <field name="model">fifire.player</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="coins"/>
+                    <field name="upgrade_points"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_player_form" model="ir.ui.view">
+            <field name="name">fifire.player.form</field>
+            <field name="model">fifire.player</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="coins"/>
+                            <field name="upgrade_points"/>
+                        </group>
+                        <notebook>
+                            <page string="Heroes">
+                                <field name="heroes" widget="many2many_tags"/>
+                            </page>
+                            <page string="Towers">
+                                <field name="towers" widget="many2many_tags"/>
+                            </page>
+                            <page string="Armies">
+                                <field name="armies" widget="many2many_tags"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Hero Views -->
+        <record id="view_hero_tree" model="ir.ui.view">
+            <field name="name">fifire.hero.tree</field>
+            <field name="model">fifire.hero</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="[(('hero_type', '=', 'cheetah'), 'warning', '')]">
+                    <field name="name"/>
+                    <field name="pace"/>
+                    <field name="strength"/>
+                    <field name="agility"/>
+                    <field name="defence"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hero_form" model="ir.ui.view">
+            <field name="name">fifire.hero.form</field>
+            <field name="model">fifire.hero</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="pace"/>
+                            <field name="strength"/>
+                            <field name="agility"/>
+                            <field name="defence"/>
+                        </group>
+                        <group>
+                            <field name="hero_type"/>
+                            <field name="player_id"/>
+                            <field name="level"/>
+                            <field name="upgrade_points"/>
+                            <field name="upgraded_attribute_1"/>
+                            <field name="upgraded_attribute_2"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tower Views -->
+        <record id="view_tower_tree" model="ir.ui.view">
+            <field name="name">fifire.tower.tree</field>
+            <field name="model">fifire.tower</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="tower_type"/>
+                    <field name="boost_attribute"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tower_form" model="ir.ui.view">
+            <field name="name">fifire.tower.form</field>
+            <field name="model">fifire.tower</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="tower_type"/>
+                            <field name="boost_attribute"/>
+                            <field name="player_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Army Views -->
+        <record id="view_army_tree" model="ir.ui.view">
+            <field name="name">fifire.army.tree</field>
+            <field name="model">fifire.army</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="strength"/>
+                    <field name="agility"/>
+                    <field name="pace"/>
+                    <field name="defence"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_army_form" model="ir.ui.view">
+            <field name="name">fifire.army.form</field>
+            <field name="model">fifire.army</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="strength"/>
+                            <field name="agility"/>
+                            <field name="pace"/>
+                            <field name="defence"/>
+                            <field name="player_id"/>
+                            <field name="heroes" widget="many2many_tags"/>
+                            <field name="tower_id"/>
+                            <field name="health"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Battle Views -->
+        <record id="view_battle_tree" model="ir.ui.view">
+            <field name="name">fifire.battle.tree</field>
+            <field name="model">fifire.battle</field>
+            <field name="arch" type="xml">
+                <tree>                    
+                    <field name="date_start"/>
+                    <field name="attacker_id"/>
+                    <field name="defender_id"/>
+                    <field name="winner_id"/>
+                    <field name="status" readonly="1"/>
+                    <field name="chosen_attacker_army_id"/>
+                    <field name="chosen_defender_army_id"/>
+                    <button string="Simulate Battle" type="object" class="oe_highlight" icon="fa-play"
+                            name="simulate_battle"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_battle_form" model="ir.ui.view">
+            <field name="name">fifire.battle.form</field>
+            <field name="model">fifire.battle</field>
+            <field name="arch" type="xml">  
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="attacker_id"/>
+                            <field name="defender_id"/>
+                            <field name="winner_id"/>
+                            <field name="status" readonly="1"/>
+                            <field name="date_start"/>
+                            <field name="chosen_attacker_army_id"/>
+                            <field name="chosen_defender_army_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_battle_calendar" model="ir.ui.view">
+            <field name="name">fifire.battle.calendar</field>
+            <field name="model">fifire.battle</field>
+            <field name="arch" type="xml">
+                <calendar>
+                    <field name="date_start"/>
+                    <field name="attacker_id"/>
+                    <field name="defender_id"/>
+                    <field name="winner_id"/>
+                    <field name="status"/>
+                    <field name="chosen_attacker_army_id"/>
+                    <field name="chosen_defender_army_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_battle_kanban" model="ir.ui.view">
+            <field name="name">fifire.battle.kanban</field>
+            <field name="model">fifire.battle</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_content">
+                                <t t-if="widget.editable">
+                                    <field name="name"/>
+                                    <span> </span>
+                                    <field name="date_start"/>
+                                    <span> </span>
+                                    <field name="status"/>
+                                </t>
+                                <t t-else="">
+                                    <strong><field name="name"/></strong>
+                                    <div>
+                                        <span>Date: <field name="date_start"/></span>
+                                        <span> </span>
+                                        <span>Status: <field name="status"/></span>
+                                    </div>
+                                    
+                                </t>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <!-- Battle Wizard Views -->
+
+<record id="view_battle_wizard_form" model="ir.ui.view">
+    <field name="name">fifire.battle.wizard.form</field>
+    <field name="model">fifire.battle.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Battle Wizard">
+            <header>
+                <!-- Navigation buttons -->
+                <button string="Previous" class="oe_highlight" states="page_2" type="object" name="action_previous"/>
+                <button string="Next" class="oe_highlight" states="page_1" type="object" name="action_next"/>
+                <button string="Finish" class="oe_highlight" states="page_2" type="object" name="action_finish"/>
+                <button string="Cancel" class="oe_link" special="cancel"/>
+            </header>
+            <sheet>
+                <!-- Page 1: Name and Description -->
+                <group name="detail" string="Battle Details" state="page_1" states="page_1">
+                    <field name="state" invisible="1"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                </group>
+                
+                <!-- Page 2: Attacker Army and Defender Army -->
+                <group name="info" string="Additional Information" state="page_2" states="page_2">
+                    <field name="attacker_army_id"/>
+                    <field name="defender_army_id"/>
+                    <field name="date_start"/>
+                </group>
+            </sheet>
+            
+        </form>
+    </field>
+</record>
+
+
+
+        <!-- Actions -->
+        <!-- Battle Wizard actions -->
+        <record id="action_launch_battle_wizard" model="ir.actions.act_window">
+            <field name="name">Launch Battle Wizard</field>
+            <field name="res_model">fifire.battle.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fifire.view_battle_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Player actions -->
+        <record id="action_player_list" model="ir.actions.act_window">
+            <field name="name">Player List</field>
+            <field name="res_model">fifire.player</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Player actions -->
+        <record id="action_player_create" model="ir.actions.act_window">
+            <field name="name">Create Player</field>
+            <field name="res_model">fifire.player</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fifire.view_player_form"/> 
+            <field name="target">new</field>
+        </record>
+
+
+        <!-- Hero actions -->
+        <record id="action_hero_list" model="ir.actions.act_window">
+            <field name="name">Hero List</field>
+            <field name="res_model">fifire.hero</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Tower actions -->
+        <record id="action_tower_list" model="ir.actions.act_window">
+            <field name="name">Tower List</field>
+            <field name="res_model">fifire.tower</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Army actions -->
+        <record id="action_army_list" model="ir.actions.act_window">
+            <field name="name">Army List</field>
+            <field name="res_model">fifire.army</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Battle actions -->
+        <record id="action_battle_list" model="ir.actions.act_window">
+            <field name="name">Battle List</field>
+            <field name="res_model">fifire.battle</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_battle_calendar" model="ir.actions.act_window">
+            <field name="name">Battle Calendar</field>
+            <field name="res_model">fifire.battle</field>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="fifire.view_battle_calendar"/>
+        </record>
+
+        <record id="action_battle_kanban" model="ir.actions.act_window">
+            <field name="name">Battle Kanban</field>
+            <field name="res_model">fifire.battle</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="fifire.view_battle_kanban"/>
+        </record>
+
+
+        <!-- Menu  -->
+
+        <menuitem name="Fifire" id="fifire.menu_root"/>
+
+        <!-- Player -->
+        <menuitem id="menu_player" name="Players" parent="fifire.menu_root"/>
+        <menuitem id="menu_player_list" name="Player List" parent="menu_player" action="action_player_list"/>
+        <menuitem id="menu_player_create" name="Create Player" parent="menu_player" action="action_player_create"/>
+
+        <!-- Hero  -->
+        <menuitem id="menu_hero" name="Heroes" parent="fifire.menu_root"/>
+        <menuitem id="menu_hero_list" name="Hero List" parent="menu_hero" action="action_hero_list"/>
+
+        <!-- Tower -->
+        <menuitem id="menu_tower" name="Towers" parent="fifire.menu_root"/>
+        <menuitem id="menu_tower_list" name="Tower List" parent="menu_tower" action="action_tower_list"/>
+
+        <!-- Army -->
+        <menuitem id="menu_army" name="Armies" parent="fifire.menu_root"/>
+        <menuitem id="menu_army_list" name="Army List" parent="menu_army" action="action_army_list"/>
+
+        <!-- Battle -->
+        <menuitem id="menu_battle" name="Battles" parent="fifire.menu_root"/>
+        <menuitem id="menu_battle_list" name="Battle List" parent="menu_battle" action="action_battle_list"/>
+        <menuitem id="menu_battle_calendar" name="Battle Calendar" parent="menu_battle" action="action_battle_calendar"/>     
+        <menuitem id="menu_battle_kanban" name="Battle Kanban" parent="menu_battle" action="action_battle_kanban"/>
+        <menuitem id="menu_battle_wizard" name="Battle Wizard" parent="menu_battle" action="action_launch_battle_wizard"/>
+    </data>
+</odoo>
