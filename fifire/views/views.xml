@@ -277,14 +277,12 @@
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </header>
                     <sheet>
-                        <!-- Page 1: Name and Description -->
                         <group name="detail" string="Battle Details" state="page_1" states="page_1">
                             <field name="state" invisible="1"/>
                             <field name="name"/>
                             <field name="description"/>
                         </group>
 
-                        <!-- Page 2: Attacker Army and Defender Army -->
                         <group name="info" string="Additional Information" state="page_2" states="page_2">
                             <field name="attacker_army_id"/>
                             <field name="total_attacker_strength"/>                            

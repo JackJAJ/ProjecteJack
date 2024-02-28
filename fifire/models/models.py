@@ -260,7 +260,6 @@ class battle(models.Model):
             pass
 
     def action_launch_battle_wizard(self):
-        # Add any logic you need before launching the wizard
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'fifire.battle.wizard',
